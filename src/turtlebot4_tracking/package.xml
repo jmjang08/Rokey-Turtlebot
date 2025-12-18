@@ -1,0 +1,19 @@
+<package format="3">
+  <name>turtlebot4_tracking</name>
+  <version>0.0.1</version>
+  <description>YOLO depth fusion and navigation control package</description>
+  <maintainer email="me@example.com">byeongsu</maintainer>
+  <license>Apache License 2.0</license>
+
+  <buildtool_depend>ament_python</buildtool_depend>
+
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>cv_bridge</exec_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

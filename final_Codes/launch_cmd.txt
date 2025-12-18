@@ -1,5 +1,0 @@
-ros2 launch twocops_bringup twocops_bringup.launch.py robot_id:=3 
-initial_pose_file:=$HOME/turtlebot4_ws/config/robot3_initial_pose.txt
-map:=$HOME/turtlebot4_ws/maps/key_map.yaml params_file:=$HOME/turtlebot4_ws/maps/local2.yaml 
-nav2_params_file:=$HOME/turtlebot4_ws/maps/nav2_net2.yaml 
-robot_id:=3 partner_robot_id:=1

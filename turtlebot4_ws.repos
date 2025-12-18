@@ -1,0 +1,17 @@
+repositories:
+  turtlebot4:
+    type: git
+    url: https://github.com/turtlebot/turtlebot4.git
+    version: humble
+  turtlebot4_simulator:
+    type: git
+    url: https://github.com/turtlebot/turtlebot4_simulator.git
+    version: humble
+  turtlebot4_desktop:
+    type: git
+    url: https://github.com/turtlebot/turtlebot4_desktop.git
+    version: humble
+  m-explore-ros2:
+    type: git
+    url: https://github.com/robo-friends/m-explore-ros2.git
+    version: main

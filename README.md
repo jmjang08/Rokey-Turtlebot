@@ -177,12 +177,11 @@ This launch file:
 This section runs the **core perception + tracking pipeline**.
 
 ```bash
-ros2 launch turtlebot4_tracking yolo_move_robot.launch.py \
-  namespace:=robot<n> \
-  model_path:=/home/rokey/turtlebot4_ws/model/best.pt \
-  rgb_topic:=/robot<n>/oakd/rgb/image_raw/compressed \
-  depth_topic:=/robot<n>/oakd/stereo/image_raw \
-  cam_info_topic:=/robot<n>/oakd/rgb/camera_info
+ros2 launch twocops_bringup twocops_bringup.launch.py robot_id:=3 \
+  initial_pose_file:=$HOME/turtlebot4_ws/config/robot3_initial_pose.txt \
+  map:=$HOME/turtlebot4_ws/maps/key_map.yaml params_file:=$HOME/turtlebot4_ws/maps/local2.yaml \
+  nav2_params_file:=$HOME/turtlebot4_ws/maps/nav2_net2.yaml \
+  robot_id:=3 partner_robot_id:=1
 ```
 
 **What this launch does:**
