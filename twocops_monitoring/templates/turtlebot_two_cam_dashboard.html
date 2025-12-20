@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>TWOCOPS</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --bg-dark1: #0b0f17;
+        --bg-dark2: #111826;
+        --panel-bg: rgba(14, 20, 35, 0.65);
+        --panel-border: rgba(0, 255, 255, 0.18);
+
+        --text-main: #ffffff;
+        --text-sub: #9aa4b2;
+
+        --neon: #14e6ff;
+        --shadow-neon: 0 0 18px rgba(20, 230, 255, 0.35);
+
+        --radius: 14px;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        background: radial-gradient(circle at 20% 30%, #0f1828, #070b11 70%);
+        font-family: 'Inter', sans-serif;
+        color: var(--text-main);
+    }
+
+    /* HEADER */
+    header {
+        height: 70px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 36px;
+        background: rgba(10, 14, 22, 0.6);
+        border-bottom: 1px solid rgba(0,255,255,0.12);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+    }
+
+    header h1 {
+        font-weight: 700;
+        font-size: 22px;
+        color: var(--neon);
+        text-shadow: 0 0 12px rgba(20, 230, 255, 0.5);
+        letter-spacing: 0.8px;
+    }
+
+    .logout-btn {
+        padding: 8px 20px;
+        border-radius: 10px;
+        background: rgba(255,255,255,0.05);
+        color: var(--text-sub);
+        border: 1px solid rgba(255,255,255,0.1);
+        text-decoration: none;
+        backdrop-filter: blur(10px);
+        transition: 0.2s ease;
+    }
+
+    .logout-btn:hover {
+        border-color: var(--neon);
+        color: var(--neon);
+        box-shadow: var(--shadow-neon);
+    }
+
+    /* GRID */
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
+        padding: 32px;
+    }
+
+    /* CAMERA CARD */
+    .cam-card {
+        background: var(--panel-bg);
+        border: 1px solid var(--panel-border);
+        border-radius: var(--radius);
+        box-shadow: 0 0 32px rgba(0,0,0,0.45);
+        backdrop-filter: blur(14px);
+        overflow: hidden;
+        position: relative;
+    }
+
+    .cam-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 1px solid rgba(20, 230, 255, 0.1);
+        border-radius: var(--radius);
+        pointer-events: none;
+    }
+
+    .cam-header {
+        padding: 18px 24px;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--text-main);
+        border-bottom: 1px solid rgba(0,255,255,0.12);
+        background: rgba(0,0,0,0.25);
+    }
+
+    .cam-video {
+        height: 360px;
+        background: rgba(0,0,0,0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .cam-video img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .cam-footer {
+        padding: 14px 24px;
+        font-size: 13px;
+        color: var(--text-sub);
+        border-top: 1px solid rgba(0,255,255,0.1);
+    }
+
+    /* BUTTONS */
+    .rec-btn {
+        width: 200px;
+        margin: 20px auto;
+        padding: 12px 0;
+        border-radius: 40px;
+        border: 1px solid var(--panel-border);
+        background: rgba(255,255,255,0.05);
+        color: var(--text-main);
+        transition: 0.2s ease;
+        font-size: 15px;
+        cursor: pointer;
+    }
+
+    .cam-card form {
+        display: flex;
+        justify-content: center;
+    }
+
+    .start:hover {
+        border-color: var(--neon);
+        box-shadow: var(--shadow-neon);
+        color: var(--neon);
+    }
+
+    .stop {
+        background: rgba(255, 87, 87, 0.2);
+        border: 1px solid rgba(255,87,87,0.5);
+        color: #ff7373;
+    }
+
+    .stop:hover {
+        border-color: #ff7373;
+        box-shadow: 0 0 18px rgba(255,87,87,0.35);
+        color: #ff9a9a;
+    }
+
+    /* Flash Message Box */
+    .flash-box {
+        margin: 24px;
+        padding: 16px;
+        border-left: 4px solid var(--neon);
+        border-radius: 12px;
+        background: rgba(0,0,0,0.45);
+        color: var(--text-main);
+        backdrop-filter: blur(12px);
+    }
+</style>
+
+</head>
+
+<body>
+
+<header>
+    <h1>⚡ TWOCOPS</h1>
+    <div class="user">
+        <span>{{ username }}</span>
+        <a class="logout-btn" href="{{ url_for('logout') }}">LOGOUT</a>
+    </div>
+</header>
+
+<div class="flash-container">
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="flash-box">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+</div>
+
+<div class="grid">
+
+    <!-- ROBOT 1 -->
+    <div class="cam-card">
+        <div class="cam-header">
+            🚓 Robot 1 – Camera
+            <span id="battery-box-r1" style="float:right; font-weight:600; color:#16c784;">
+                🔋 --%
+            </span>
+        </div>
+
+        <form method="post" action="/toggle_record_robot1">
+            {% if robot1_enabled %}
+            <button class="rec-btn stop">■ Stop Recording</button>
+            {% else %}
+            <button class="rec-btn start">● Start Recording</button>
+            {% endif %}
+        </form>
+
+        <div class="cam-video">
+            <img src="/robot1_feed">
+        </div>
+
+        <div class="cam-footer">Topic: /robot1/oakd/rgb/image_raw/compressed</div>
+    </div>
+
+    <!-- ROBOT 3 -->
+    <div class="cam-card">
+        <div class="cam-header">
+            🚓 Robot 3 – Camera
+            <span id="battery-box-r3" style="float:right; font-weight:600; color:#16c784;">
+                🔋 --%
+            </span>
+        </div>
+
+        <form method="post" action="/toggle_record_robot3">
+            {% if robot3_enabled %}
+            <button class="rec-btn stop">■ Stop Recording</button>
+            {% else %}
+            <button class="rec-btn start">● Start Recording</button>
+            {% endif %}
+        </form>
+
+        <div class="cam-video">
+            <img src="/robot3_feed">
+        </div>
+
+        <div class="cam-footer">Topic: /robot3/repub/compressed</div>
+    </div>
+
+</div>
+
+</body>
+
+<script>
+function updateBattery() {
+    fetch('/battery_status')
+        .then(response => response.json())
+        .then(data => {
+            // Robot 1
+            const b1 = document.getElementById('battery-box-r1');
+            if (data.robot1 === "N/A") b1.textContent = "🔋 --%";
+            else b1.textContent = `🔋 ${data.robot1}%`;
+
+            // Robot 3
+            const b3 = document.getElementById('battery-box-r3');
+            if (data.robot3 === "N/A") b3.textContent = "🔋 --%";
+            else b3.textContent = `🔋 ${data.robot3}%`;
+        });
+}
+
+setInterval(updateBattery, 60000);
+updateBattery();
+</script>
+
+</html>
