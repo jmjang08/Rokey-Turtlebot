@@ -1,6 +1,6 @@
 # 🚔 Two Cops
 
-> Rokey Bootcamp Cobot-3rd Project | 🗓️: 2025.11.10 ~ 2025.11.21 <br>
+> Rokey Bootcamp Turtlebot Project | 🗓️: 2025.11.10 ~ 2025.11.21 <br>
 > Original Repository: 
 [Rokey-C1/turtlebot4_ws](https://github.com/Rokey-C1/turtlebot4_ws) & [Rokey-C1/twocops_monitoring](https://github.com/Rokey-C1/twocops_monitoring)
 ## 📝 Overview
