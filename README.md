@@ -5,7 +5,7 @@
 [Rokey-C1/turtlebot4_ws](https://github.com/Rokey-C1/turtlebot4_ws) & [Rokey-C1/twocops_monitoring](https://github.com/Rokey-C1/twocops_monitoring)
 
 ## 🎬 Demo Video
-[![Two Cops Demo](https://img.youtube.com/vi/IdMPBq4QXjY0.jpg)](https://www.youtube.com/watch?v=IdMPBq4QXjY)
+[![TIAGo Delivery Robot Demo](https://img.youtube.com/vi/IdMPBq4QXjY/0.jpg)](https://www.youtube.com/watch?v=IdMPBq4QXjY)
 
 ## 📝 Overview
 
